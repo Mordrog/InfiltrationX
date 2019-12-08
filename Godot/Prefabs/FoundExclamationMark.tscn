@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=2]
+
+[sub_resource type="Shader" id=5]
+code = "shader_type spatial;
+render_mode unshaded;
+
+void fragment() {
+	float time_cos = cos(TIME*2.0)/8.0;
+	ALBEDO = vec3(0.8 + time_cos, 0.8 + time_cos, 0.0);
+}"
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = SubResource( 5 )
+
+[sub_resource type="CylinderMesh" id=7]
+material = SubResource( 6 )
+top_radius = 0.3
+bottom_radius = 0.001
+
+[sub_resource type="Shader" id=8]
+code = "shader_type spatial;
+render_mode unshaded;
+
+void fragment() {
+	float time_cos = cos(TIME*2.0)/8.0;
+	ALBEDO = vec3(0.8 + time_cos, 0.8 + time_cos, 0.0);
+}"
+
+[sub_resource type="ShaderMaterial" id=9]
+shader = SubResource( 8 )
+
+[sub_resource type="SphereMesh" id=10]
+material = SubResource( 9 )
+radius = 0.25
+height = 0.5
+
+[node name="FoundExclamationMark" type="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.66209, 0 )
+visible = false
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = SubResource( 7 )
+material/0 = null
+
+[node name="MeshInstance2" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.84123, 0 )
+mesh = SubResource( 10 )
+material/0 = null
+

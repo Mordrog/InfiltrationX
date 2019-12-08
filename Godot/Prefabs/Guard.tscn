@@ -1,0 +1,76 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Scripts/Guard.gd" type="Script" id=1]
+[ext_resource path="res://Prefabs/FoundExclamationMark.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Prefabs/VisionArea.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scripts/StateMachines/Guard/EnemyStateMachine.gd" type="Script" id=4]
+[ext_resource path="res://Scripts/StateMachines/Guard/Patrol.gd" type="Script" id=5]
+[ext_resource path="res://Scripts/StateMachines/Guard/TrackPlayer.gd" type="Script" id=6]
+
+[sub_resource type="CapsuleShape" id=1]
+height = 2.0
+
+[sub_resource type="Shader" id=2]
+code = "shader_type spatial;
+render_mode unshaded;
+
+void fragment() {
+	float time_cos = cos(TIME*2.0)/8.0;
+	ALBEDO = vec3(0.8 + time_cos, 0.0, 0.0);
+}"
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
+
+[sub_resource type="CapsuleMesh" id=4]
+material = SubResource( 3 )
+mid_height = 2.0
+
+[node name="Guard" type="KinematicBody" groups=[
+"enemy",
+]]
+script = ExtResource( 1 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-008, -1, 0, 1, -4.37114e-008, 0, 2, 0 )
+shape = SubResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-008, -1, 0, 1, -4.37114e-008, 0, 2, 0 )
+layers = 2
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="FoundExclamationMark" parent="." instance=ExtResource( 2 )]
+
+[node name="VisionArea" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.08787, -0.992199 )
+collision_mask = 0
+width = 20.0
+
+[node name="States" type="Node" parent="."]
+script = ExtResource( 4 )
+START_STATE = NodePath("../../Guard/States/Patrol")
+
+[node name="Patrol" type="Node" parent="States"]
+script = ExtResource( 5 )
+
+[node name="TrackPlayer" type="Node" parent="States"]
+script = ExtResource( 6 )
+
+[node name="SpotLight" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.12277, -1.129 )
+light_color = Color( 1, 0.313726, 0.313726, 1 )
+light_energy = 16.0
+light_cull_mask = 4294967293
+shadow_enabled = true
+spot_range = 22.4214
+spot_attenuation = 0.00317286
+spot_angle = 41.055
+
+[connection signal="found_target" from="VisionArea" to="States/TrackPlayer" method="_on_VisionArea_found_target"]
+[connection signal="found_target" from="VisionArea" to="States/Patrol" method="_on_VisionArea_found_target"]
+[connection signal="lost_target" from="VisionArea" to="States/TrackPlayer" method="_on_VisionArea_lost_target"]
+[connection signal="state_changed" from="States" to="." method="_on_States_state_changed"]

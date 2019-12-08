@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/AlarmLight.gd" type="Script" id=1]
+
+[node name="AlarmLight" type="SpotLight" groups=[
+"alarm",
+]]
+transform = Transform( 0.615249, 0.557436, 0.557436, 0, -0.707107, 0.707107, 0.788333, -0.435047, -0.435047, -11.3648, 13.7693, -3.26264 )
+light_color = Color( 1, 0, 0, 1 )
+light_energy = 9.62
+shadow_enabled = true
+spot_range = 30.3268
+script = ExtResource( 1 )
+

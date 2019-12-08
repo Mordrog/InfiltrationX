@@ -1,0 +1,170 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://Materials/Floor1.material" type="Material" id=1]
+[ext_resource path="res://Materials/Wall2.material" type="Material" id=2]
+[ext_resource path="res://Materials/Wall3.material" type="Material" id=3]
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 20, 1, 20 )
+
+[sub_resource type="CubeMesh" id=4]
+material = ExtResource( 1 )
+size = Vector3( 40, 2, 40 )
+
+[sub_resource type="BoxShape" id=7]
+extents = Vector3( 2, 5, 2 )
+
+[sub_resource type="CubeMesh" id=8]
+material = ExtResource( 2 )
+size = Vector3( 4, 10, 4 )
+
+[sub_resource type="BoxShape" id=9]
+extents = Vector3( 8, 5, 0.5 )
+
+[sub_resource type="CubeMesh" id=10]
+material = ExtResource( 3 )
+size = Vector3( 16, 10, 1 )
+
+[sub_resource type="BoxShape" id=5]
+extents = Vector3( 6, 1, 6 )
+
+[sub_resource type="CubeMesh" id=6]
+material = ExtResource( 1 )
+size = Vector3( 12, 2, 12 )
+
+[sub_resource type="BoxShape" id=11]
+extents = Vector3( 21, 5, 1 )
+
+[sub_resource type="CubeMesh" id=12]
+material = ExtResource( 3 )
+size = Vector3( 42, 10, 2 )
+
+[sub_resource type="BoxShape" id=13]
+extents = Vector3( 20, 5, 1 )
+
+[sub_resource type="CubeMesh" id=14]
+material = ExtResource( 3 )
+size = Vector3( 40, 10, 2 )
+
+[sub_resource type="BoxShape" id=15]
+extents = Vector3( 20, 5, 1 )
+
+[sub_resource type="CubeMesh" id=16]
+material = ExtResource( 3 )
+size = Vector3( 40, 10, 2 )
+
+[node name="MainGeometry" type="Spatial"]
+editor/display_folded = true
+
+[node name="Floor" type="KinematicBody" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="Floor"]
+shape = SubResource( 3 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Floor"]
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="Pillar" type="KinematicBody" parent="Floor"]
+transform = Transform( 0.0126339, 0, 0.99992, 0, 1, 0, -0.99992, 0, 0.0126339, 10.892, 6, -0.287 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Floor/Pillar"]
+shape = SubResource( 7 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Floor/Pillar"]
+mesh = SubResource( 8 )
+material/0 = null
+
+[node name="Wall2" type="KinematicBody" parent="Floor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 6, -8 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Floor/Wall2"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Floor/Wall2"]
+mesh = SubResource( 10 )
+material/0 = null
+
+[node name="Floor2" type="KinematicBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -50 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Floor2"]
+shape = SubResource( 3 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Floor2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0554438, -0.0154495 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="Floor3" type="KinematicBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -26 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Floor3"]
+transform = Transform( 1, -4.44089e-016, 7.10543e-015, 5.68434e-014, 1, 0, -1.42109e-014, 2.98023e-008, 1, 0, 0, 0 )
+shape = SubResource( 5 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Floor3"]
+transform = Transform( 1, -3.55271e-015, 2.84217e-014, 0, 0.999999, -9.53674e-007, 7.10543e-014, 2.98023e-008, 0.999999, 0, 0, 0 )
+mesh = SubResource( 6 )
+material/0 = null
+
+[node name="Wall" type="KinematicBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 6, -8 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Wall"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Wall"]
+mesh = SubResource( 10 )
+material/0 = null
+
+[node name="Wall3" type="KinematicBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 6, 8 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Wall3"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Wall3"]
+mesh = SubResource( 10 )
+material/0 = null
+
+[node name="Wall4" type="KinematicBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 6, 8 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Wall4"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Wall4"]
+mesh = SubResource( 10 )
+material/0 = null
+
+[node name="Wall5" type="KinematicBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 21 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Wall5"]
+shape = SubResource( 11 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Wall5"]
+mesh = SubResource( 12 )
+material/0 = null
+
+[node name="Wall6" type="KinematicBody" parent="."]
+transform = Transform( -4.37114e-008, 0, 1, 0, 1, 0, -1, 0, -4.37114e-008, 21, 6, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Wall6"]
+shape = SubResource( 13 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Wall6"]
+mesh = SubResource( 14 )
+material/0 = null
+
+[node name="Wall7" type="KinematicBody" parent="."]
+transform = Transform( -4.37114e-008, 0, 1, 0, 1, 0, -1, 0, -4.37114e-008, -21, 6, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Wall7"]
+shape = SubResource( 15 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Wall7"]
+mesh = SubResource( 16 )
+material/0 = null
+
